@@ -2,7 +2,7 @@
 import React from 'react';
 import VRLabLayout from '@/components/layout/VRLabLayout';
 import { Card } from "@/components/ui/card";
-import { Microscope, Flask, Atom } from 'lucide-react';
+import { Microscope, FlaskConical, Atom } from 'lucide-react';
 
 const ExperimentCard = ({ 
   title, 
@@ -57,7 +57,7 @@ const Index = () => {
         <ExperimentCard
           title="الكيمياء"
           count={96}
-          icon={Flask}
+          icon={FlaskConical}
           onClick={() => navigateToExperiments('chemistry')}
         />
         <ExperimentCard
