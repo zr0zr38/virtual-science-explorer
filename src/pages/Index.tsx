@@ -19,7 +19,10 @@ import {
   Brain,
   HeartPulse,
   Droplets,
-  Activity
+  Activity,
+  BookOpen,
+  GraduationCap,
+  Users
 } from 'lucide-react';
 import { useToast } from "@/components/ui/use-toast";
 
@@ -30,7 +33,8 @@ const ExperimentCard = ({
   description,
   experiments,
   onClick,
-  difficulty = "متوسط"
+  difficulty = "متوسط",
+  learningOutcomes = []
 }: { 
   title: string; 
   count: number; 
@@ -39,6 +43,7 @@ const ExperimentCard = ({
   experiments?: string[];
   onClick: () => void;
   difficulty?: string;
+  learningOutcomes?: string[];
 }) => {
   const { toast } = useToast();
 
@@ -68,6 +73,22 @@ const ExperimentCard = ({
           <p className="text-gray-600 mb-3">{count} تجارب</p>
           {description && (
             <p className="text-sm text-gray-500 mb-4">{description}</p>
+          )}
+          {learningOutcomes.length > 0 && (
+            <div className="mb-4">
+              <h4 className="text-sm font-semibold text-lab-darkGrey flex items-center gap-2 mb-2">
+                <GraduationCap className="w-4 h-4" />
+                مخرجات التعلم
+              </h4>
+              <ul className="text-sm text-gray-500 space-y-1">
+                {learningOutcomes.map((outcome, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="mt-1">•</span>
+                    {outcome}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
           {experiments && (
             <ScrollArea className="h-32 w-full rounded-md border p-2">
@@ -126,6 +147,12 @@ const Index = () => {
       icon: Microscope,
       description: "تشريح افتراضي ودراسة الخلايا والأنسجة",
       difficulty: "متقدم",
+      learningOutcomes: [
+        "فهم تركيب الخلية وأجزائها الرئيسية",
+        "دراسة عملية الانقسام الخلوي بالتفصيل",
+        "تحليل الأنسجة الحية وتركيبها",
+        "فهم وظائف أعضاء الجسم المختلفة"
+      ],
       experiments: [
         "تجربة الخلية النباتية والحيوانية",
         "دراسة الأنسجة الحية",
@@ -142,6 +169,12 @@ const Index = () => {
       icon: FlaskConical,
       description: "تفاعلات كيميائية وتجارب معملية",
       difficulty: "متوسط",
+      learningOutcomes: [
+        "فهم التفاعلات الكيميائية الأساسية",
+        "إتقان تقنيات المعايرة والقياس",
+        "دراسة الروابط الكيميائية",
+        "تحليل المركبات العضوية وغير العضوية"
+      ],
       experiments: [
         "تفاعلات الأكسدة والاختزال",
         "الكشف عن البروتينات",
@@ -158,6 +191,12 @@ const Index = () => {
       icon: Atom,
       description: "تجارب القوى والحركة والطاقة",
       difficulty: "أساسي",
+      learningOutcomes: [
+        "فهم قوانين نيوتن للحركة",
+        "دراسة الطاقة وأشكالها المختلفة",
+        "تحليل الظواهر الكهربائية والمغناطيسية",
+        "فهم خصائص الضوء والصوت"
+      ],
       experiments: [
         "قوانين نيوتن للحركة",
         "قياس الطاقة الحركية",
@@ -180,13 +219,16 @@ const Index = () => {
           اكتشف عالم التجارب العلمية التفاعلية بتقنية الواقع الافتراضي
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-          <Badge variant="secondary" className="bg-lab-lightPurple/10 text-lab-purple">
+          <Badge variant="secondary" className="bg-lab-lightPurple/10 text-lab-purple flex items-center gap-1">
+            <BookOpen className="w-4 h-4" />
             تجربة تفاعلية VR
           </Badge>
-          <Badge variant="secondary" className="bg-lab-lightPurple/10 text-lab-purple">
+          <Badge variant="secondary" className="bg-lab-lightPurple/10 text-lab-purple flex items-center gap-1">
+            <Users className="w-4 h-4" />
             عربي / English
           </Badge>
-          <Badge variant="secondary" className="bg-green-100 text-green-700">
+          <Badge variant="secondary" className="bg-green-100 text-green-700 flex items-center gap-1">
+            <Activity className="w-4 h-4" />
             متاح الآن
           </Badge>
         </div>
@@ -258,6 +300,10 @@ const Index = () => {
               <li className="flex items-center gap-2 text-gray-600">
                 <HeartPulse className="w-4 h-4 text-lab-purple" />
                 يمكن حفظ نتائج التجارب ومشاركتها
+              </li>
+              <li className="flex items-center gap-2 text-gray-600">
+                <Droplets className="w-4 h-4 text-lab-purple" />
+                التجارب آمنة تماماً وتحاكي الواقع بدقة
               </li>
             </ul>
           </div>
